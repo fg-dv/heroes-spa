@@ -1,9 +1,7 @@
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router';
+import { Shield, Search, User, LogOut, Zap, Users } from 'lucide-react';
 
-export const Navbar = (props) => {
-
-    console.log(props);
-
+export const Navbar = () => {
     const navigate = useNavigate();
 
     const onLogout = () => {
@@ -13,55 +11,66 @@ export const Navbar = (props) => {
     }
 
     return (
-        <nav className="navbar navbar-expand-sm navbar-dark bg-dark p-2">
-            
-            <Link 
-                className="navbar-brand" 
-                to="/"
-            >
-                React Router
-            </Link>
+        <nav className="navbar navbar-expand-sm navbar-dark p-0">
+            <div className="container">
+                <Link 
+                    className="navbar-brand d-flex align-items-center gap-2" 
+                    to="/"
+                >
+                    <Shield size={24} className="text-primary" />
+                    <span className="gradient-text">Heroes App</span>
+                </Link>
 
-            <div className="navbar-collapse">
-                <div className="navbar-nav">
+                <div className="navbar-collapse">
+                    <div className="navbar-nav d-flex gap-1">
+                        <NavLink 
+                            className={({isActive}) => 
+                                `nav-link d-flex align-items-center gap-2 ${isActive ? 'active' : ''}`
+                            } 
+                            to="/marvel"
+                        >
+                            <Zap size={16} />
+                            <span>Marvel</span>
+                        </NavLink>
 
-                    <NavLink 
-                        className={({isActive}) => `nav-item nav-link ${ isActive ? 'active' : '' }`} 
-                        to="/marvel"
-                    >
-                        Marvel
-                    </NavLink>
+                        <NavLink 
+                            className={({isActive}) => 
+                                `nav-link d-flex align-items-center gap-2 ${isActive ? 'active' : ''}`
+                            }  
+                            to="/dc"
+                        >
+                            <Shield size={16} />
+                            <span>DC</span>
+                        </NavLink>
 
-                    <NavLink 
-                        className={({isActive}) => `nav-item nav-link ${ isActive ? 'active' : '' }`}  
-                        to="/dc"
-                    >
-                        DC
-                    </NavLink>
-
-                    <NavLink 
-                        className={({isActive}) => `nav-item nav-link ${ isActive ? 'active' : '' }`}  
-                        to="/search"
-                    >
-                        Search
-                    </NavLink>
+                        <NavLink 
+                            className={({isActive}) => 
+                                `nav-link d-flex align-items-center gap-2 ${isActive ? 'active' : ''}`
+                            }  
+                            to="/search"
+                        >
+                            <Search size={16} />
+                            <span>Search</span>
+                        </NavLink>
+                    </div>
                 </div>
-            </div>
 
-            <div className="navbar-collapse collapse w-100 order-3 dual-collapse2 d-flex justify-content-end">
-                <ul className="navbar-nav ml-auto">
-                    <span className="nav-item nav-link text-primary">
-                        Luis
-                    </span>
+                <div className="navbar-collapse collapse w-100 order-3 dual-collapse2 d-flex justify-content-end">
+                    <div className="navbar-nav d-flex align-items-center gap-2">
+                        <span className="nav-item nav-link text-primary d-flex align-items-center gap-2">
+                            <User size={16} />
+                            <span>Luis</span>
+                        </span>
 
-                    <button
-                        className="nav-item nav-link btn"
-                        onClick={onLogout}
-                    >
-                        Logout
-                    </button>
-                        
-                </ul>
+                        <button
+                            className="btn btn-outline-primary btn-sm d-flex align-items-center gap-2"
+                            onClick={onLogout}
+                        >
+                            <LogOut size={14} />
+                            <span>Logout</span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </nav>
     )
